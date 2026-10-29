@@ -1,0 +1,9 @@
+{
+  "board_size": 20,
+  "events": {
+    "5": {"type": "forward", "value": 2},
+    "9": {"type": "back", "value": 3},
+    "13": {"type": "skip"},
+    "17": {"type": "quiz"}
+  }
+}

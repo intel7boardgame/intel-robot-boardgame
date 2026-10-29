@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# 데이터·모델 (용량이 커서 git 제외, Hugging Face Hub로 공유)
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+outputs/
+*.db
+*.sqlite
+
+# 에디터·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+transitions
+opencv-python
+numpy
+openvino
+ollama
+pygame-ce
+# 로봇·비전 확장 (필요할 때 설치)
+# lerobot
+# ikpy
+# mediapipe
+pytest

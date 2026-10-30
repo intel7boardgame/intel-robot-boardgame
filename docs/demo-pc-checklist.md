@@ -35,7 +35,7 @@ powershell -ExecutionPolicy Bypass -File scripts\demo_pc_check.ps1 -ModelsFrom E
 2. **개발 환경:** `setup_env.ps1 -Robot`을 실행합니다.
    - uv 설치, Python 3.12 `.venv` 생성
    - requirements.txt 설치
-   - CUDA torch 설치 → LeRobot 설치 → opencv 화면 출력 복구
+   - CUDA torch 설치 → LeRobot 설치 → opencv 화면 출력 복구 → FFmpeg 7.1(없으면 winget으로 설치)
    - 테스트와 mock 한 판 실행
 3. **모델:** USB에서 복사하거나 `ollama pull`로 받습니다.
 4. **환경 점검:** `check_env.py --demo --robot`
@@ -54,6 +54,7 @@ powershell -ExecutionPolicy Bypass -File scripts\demo_pc_check.ps1 -ModelsFrom E
 | 드라이버 | 570 이상 | NVIDIA 홈페이지에서 최신 드라이버 설치 |
 | torch CUDA | `12.8 · NVIDIA GeForce RTX 3050` | CPU 전용 torch가 깔린 것. `setup_env.ps1 -Robot` 다시 실행 |
 | OpenCV 화면 출력 | 가능 | `setup_env.ps1 -Robot` 다시 실행 (headless가 덮어씀) |
+| FFmpeg · torchcodec | FFmpeg 7.1 · torchcodec 버전 표시 | `winget install --id BtbN.FFmpeg.GPL.Shared.7.1` 후 **새 PowerShell 창**에서 다시 실행. ACT 녹화·학습 전까지만 해결하면 됨 |
 | Ollama 서버·모델 | ✅ | 트레이에서 Ollama 실행 / `ollama pull gemma4:e2b` |
 | COM 포트 | 로봇 USB를 꽂으면 COM 번호 2개 | 케이블·전원 확인. 번호를 README에 기록 (A) |
 

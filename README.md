@@ -57,6 +57,7 @@ uv pip sync requirements.lock          # 또는 pip install -r requirements.lock
 # 로봇(A)·시연 PC만 (Windows): lock에 CUDA torch까지 들어 있음 → opencv 화면 출력 복구
 uv pip sync requirements-robot.lock --extra-index-url https://download.pytorch.org/whl/cu128 --index-strategy unsafe-best-match
 uv pip install --reinstall --no-deps opencv-python==4.13.0.92
+winget install --id BtbN.FFmpeg.GPL.Shared.7.1   # torchcodec(LeRobot 영상)용 FFmpeg 4~8 shared. 설치 후 새 터미널
 ```
 </details>
 

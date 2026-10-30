@@ -4,7 +4,11 @@ AI 코딩 에이전트(Claude Code, Codex, Cursor 등)가 이 저장소에서 �
 
 ## 프로젝트
 
-사람과 AI 로봇(SO-101)이 실물 보드게임으로 대결하는 시스템입니다. 카메라가 판을 읽고(Intel Geti + OpenVINO), 로봇이 주사위를 굴리고 말을 옮기며(LeRobot), 로컬 LLM이 게임을 중계합니다(Ollama). 기간은 10일이고 시연이 목표이므로, 확장 기능보다 **한 판이 끝까지 안정적으로 도는 것**이 우선입니다.
+사람과 AI 로봇(SO-101)이 실물 **윷놀이**로 대결하는 시스템입니다. 카메라가 윷 결과와 판을 읽고(Intel Geti + OpenVINO), 로봇이 윷을 던지고 말을 옮기며(LeRobot), 로컬 LLM이 게임을 중계합니다(Ollama). 기간은 10일이고 시연이 목표이므로, 확장 기능보다 **한 판이 끝까지 안정적으로 도는 것**이 우선입니다.
+
+- **본 계획: 윷놀이** (편마다 말 2개, 잡기·업기 포함). 1주차(Day 1~5)는 윷놀이만 만듭니다. 규칙은 `docs/rules.md`, 인터페이스 제안은 `docs/interfaces.md` 1절.
+- **차선책: 돌 vs 인간** (정답이 0·1·2인 퀴즈, 로봇이 돌 편으로 주사위를 굴려 답함, 맞히면 1칸 전진, 3칸 먼저 승리. 「돌 vs 인간」 규칙 참고, 원작 문제는 쓰지 않음). 2주차 첫날(Day 6) 점검에서 윷놀이 완성이 어렵다고 판단될 때만 전환합니다.
+- 지금 코드는 처음 만든 **주사위 게임 골격**입니다. 윷놀이 인터페이스가 Day 1에 확정되면 C1이 전환하며, 주사위 골격은 차선책 전환에 대비해 남겨 둡니다.
 
 ## 명령
 
@@ -25,12 +29,12 @@ python -m pytest tests           # 테스트
 | `src/common/interfaces.py` | 모듈 간 약속 (데이터 형식, Protocol) | 김동현 |
 | `src/common/mock.py` | 하드웨어 없는 가짜 구현 | 김동현 |
 | `src/game/` | 오케스트레이터, 턴 상태 머신(transitions), 규칙, 실패 복구 | 김동현 |
-| `src/vision/` | `read_dice()`, `piece_at(cell)` | 정성욱 |
-| `src/robot/` | `home()`, `roll_dice()`, `move(src, dst)` | 신이서 |
-| `src/llm/` | `narrate(event)` (Ollama) | 김관영 |
+| `src/vision/` | `read_yut()`(윷놀이), `read_dice()`(돌 vs 인간), `piece_at(cell)` | 정성욱 |
+| `src/robot/` | `home()`, `throw_yut()`(윷놀이), `roll_dice()`(돌 vs 인간), `move(src, dst)` | 신이서 |
+| `src/llm/` | `narrate(event)` (Ollama), 퀴즈(`quiz.py`), 기록 질의(`stats_bot.py`) | 김관영 |
 | `src/db/` | `save(event)` (SQLite) | 김관영 |
 | `src/ui/` | `update(state, message)`, `ask_help(message)` | 김민범 |
-| `config/` | `rules.json` 규칙, `slots.json` 칸 ROI, `poses.json` 로봇 자세 | 각 담당 |
+| `config/` | `rules.json` 규칙, `quiz.json` 퀴즈 문제, `slots.json` 칸 ROI, `poses.json` 로봇 자세 | 각 담당 |
 | `docs/` | `interfaces.md`, `CONTRIBUTING.md`, `rules.md` | - |
 
 ## 반드시 지킬 설계 규칙
@@ -40,7 +44,7 @@ python -m pytest tests           # 테스트
 3. **로봇이 움직인 뒤에는 `home()`을 부르고 나서 비전을 호출합니다.** 팔이 카메라를 가립니다.
 4. **로봇이 움직이는 동안에는 LLM을 호출하지 않습니다.** 시연 PC가 RTX 3050 6GB라 자원이 부족합니다.
 5. **실패해도 게임이 멈추면 안 됩니다.** 인식·이동 실패는 최대 2회 재시도(`game/recovery.py`)하고, 그래도 안 되면 `ask_help()`로 사람에게 넘깁니다.
-6. **규칙 값은 코드에 쓰지 않고 `config/rules.json`에 둡니다.** 칸 수, 이벤트 칸, 승리 조건을 바꿀 때 코드를 고치지 않아도 되게 합니다.
+6. **규칙 값은 코드에 쓰지 않고 `config/`에 둡니다.** 윷판 연결(29칸·지름길), 말 수, 한 번 더 조건, 돌 vs 인간 칸 수를 바꿀 때 코드를 고치지 않아도 되게 합니다.
 7. **새 하드웨어 기능을 만들면 `common/mock.py`에 가짜 구현도 함께 둡니다.** `--mock` 실행이 깨지면 안 됩니다.
 
 ## 인터페이스를 바꿀 때

@@ -1,0 +1,44 @@
+{
+  "_comment": "프로젝트 전체 버전 기준 (관리: 김관영 C2). 바꾸는 절차는 docs/versions.md. scripts/check_env.py가 이 값과 실제 환경을 비교합니다",
+  "updated": "2026-10-30",
+  "python": {
+    "version": "3.12.14",
+    "_comment": "LeRobot >=3.12, geti-sdk <=3.13. 패치 버전이 달라도 3.12면 동작하지만 점검에서 ⚠️로 표시"
+  },
+  "uv": {"min": "0.12.0"},
+  "nvidia_driver": {"min": "570", "_comment": "CUDA 12.8 torch 빌드 조건"},
+  "torch": {
+    "packages": ["torch==2.11.0", "torchvision==0.26.0"],
+    "index_url": "https://download.pytorch.org/whl/cu128",
+    "cuda": "12.8"
+  },
+  "lerobot": {"version": "0.6.1", "_comment": "requirements-robot.txt와 같게"},
+  "opencv_gui": "opencv-python==4.13.0.92",
+  "lock_files": {
+    "common": "requirements.lock",
+    "robot": "requirements-robot.lock",
+    "_comment": "requirements*.txt(직접 고른 패키지) → scripts/lock_deps.ps1 → *.lock(하위 패키지까지 전부 고정). 설치는 lock으로 합니다"
+  },
+  "ollama": {
+    "app": "0.40.13",
+    "_comment": "winget install --id Ollama.Ollama -e --version 0.40.13",
+    "default_model": "gemma4:e2b",
+    "models": {
+      "gemma4:e2b": {"digest": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2", "size_gb": 4.59, "role": "중계 기본"},
+      "qwen2.5:3b": {"digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b", "size_gb": 1.93, "role": "중계 대안 (더 가벼움)"},
+      "exaone3.5:7.8b": {"digest": "c7c4e3d1ca22fe9225f18b35eb719f67e2ca96a42e7fd17294a45b83ba8fbf03", "size_gb": 4.77, "role": "선택: ACT를 쓰지 않을 때만", "optional": true}
+    },
+    "_models_comment": "태그(gemma4:e2b)는 나중에 내용이 바뀔 수 있어 digest로 같은 모델인지 확인합니다. 다르면 이 PC에서 scripts/ollama_models.py로 복사해 맞춥니다"
+  },
+  "vision": {
+    "openvino": "2026.4.1",
+    "geti_server": null,
+    "geti_sdk": null,
+    "_comment": "Geti 서버·SDK 버전은 B(정성욱)가 Day 1에 확인해서 채웁니다. SDK 2.6 미만은 서버와 버전이 같아야 함"
+  },
+  "robot": {
+    "follower_id": null,
+    "leader_id": null,
+    "_comment": "LeRobot 캘리브레이션 id는 A(신이서)가 Day 1에 정해서 채웁니다. 모든 lerobot 명령에서 같은 id를 써야 같은 캘리브레이션을 읽음"
+  }
+}

@@ -168,14 +168,14 @@ Oct 30, 2026 · @김관영 · 윷놀이 기준 개정 (10/30 내부 회의 결�
 | 화면·데이터 | 게임 화면 | 윷판, 말 위치, 윷 결과, 말 선택 | pygame-ce 또는 Streamlit | MVP |
 | 화면·데이터 | 대전 기록 | 턴별 로그와 결과 저장 | SQLite | MVP |
 | 화면·데이터 | 기록 질의 챗봇 | "오늘 로봇 승률은?" 같은 질문에 답변 | Ollama + Text-to-SQL | 확장 |
-| 공통 | 개발 환경 | 공통 가상환경, 모듈별 폴더, 코드 관리 | Python 3.10, Git/GitHub | MVP |
+| 공통 | 개발 환경 | 공통 가상환경(설치 스크립트), 모듈별 폴더, 코드 관리 | Python 3.12, uv, Git/GitHub | MVP |
 | 공통 | 학습 파이프라인 | 데이터 수집 → 집 PC 학습 → 시연 PC로 체크포인트 이동 | LeRobot, Hugging Face Hub | 확장 |
 
 ### 기술 스택 요약
 
 | 분야 | 선택 |
 | --- | --- |
-| 언어 | Python 3.10 |
+| 언어 | Python 3.12 (LeRobot 조건) |
 | 비전 AI | Intel Geti (학습), OpenVINO (CPU 추론), OpenCV, MediaPipe |
 | 로봇 | SO-101 (조립 완료품), LeRobot (ACT), ikpy |
 | LLM·음성 | Ollama (exaone3.5), MeloTTS, faster-whisper |

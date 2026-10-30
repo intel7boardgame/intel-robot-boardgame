@@ -1,11 +1,14 @@
-transitions
-opencv-python
-numpy
-openvino
-ollama
-pygame-ce
-# 로봇·비전 확장 (필요할 때 설치)
-# lerobot
-# ikpy
+# 공통으로 직접 쓰는 패키지 (Python 3.12). 고친 뒤에는 scripts/lock_deps.ps1로 lock을 다시 만듭니다 (docs/versions.md).
+# 설치는 이 파일이 아니라 requirements.lock으로 합니다 (scripts/setup_env.ps1).
+# numpy·opencv 버전은 lerobot 0.6.1 조건(numpy<2.3, opencv<4.14)에 맞췄습니다.
+transitions==0.9.3
+numpy==2.2.6
+opencv-python==4.13.0.92
+openvino==2026.4.1
+ollama==0.6.3
+pygame-ce==2.5.8
+pytest==9.2.0
+# 로봇(A)·시연 PC: requirements-robot.txt (CUDA torch 먼저 설치, setup_env.ps1 -Robot)
+# 확장 (필요할 때 설치)
 # mediapipe
-pytest
+# ikpy

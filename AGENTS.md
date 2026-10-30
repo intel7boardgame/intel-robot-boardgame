@@ -13,7 +13,8 @@ AI 코딩 에이전트(Claude Code, Codex, Cursor 등)가 이 저장소에서 �
 ## 명령
 
 ```bash
-pip install -r requirements.txt
+powershell -ExecutionPolicy Bypass -File scripts\setup_env.ps1   # Python 3.12 .venv 설치 (로봇은 -Robot)
+python scripts/check_env.py      # 환경 점검
 python src/main.py --mock        # 비전·로봇 없이 키보드로 한 판 진행 (하드웨어 없이 확인할 때)
 python src/main.py               # 실제 카메라·로봇 연결
 python -m pytest tests           # 테스트
@@ -53,7 +54,7 @@ python -m pytest tests           # 테스트
 
 ## 코드 스타일
 
-- Python 3.10 이상, 타입 힌트 사용, 데이터는 `dataclass`.
+- Python 3.12 (LeRobot 조건), 타입 힌트 사용, 데이터는 `dataclass`.
 - 모듈·클래스 docstring과 주석은 한국어로 짧게. 주변 코드와 같은 밀도로 씁니다.
 - 파일 경로는 `pathlib.Path`, 설정 파일은 `encoding="utf-8"`로 읽습니다.
 - 새 의존성은 `requirements.txt`에 추가합니다. 무거운 패키지(lerobot, mediapipe 등)는 필요할 때만 주석을 풉니다.

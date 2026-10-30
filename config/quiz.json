@@ -1,0 +1,17 @@
+{
+  "_comment": "퀴즈 칸 문제 은행 (담당: 김관영 C2). answer는 choices의 번호(1부터). LLM 출제가 실패하면 여기서 냅니다",
+  "questions": [
+    {"question": "이 게임에서 로봇이 주사위 눈을 읽을 때 쓰는 것은?", "choices": ["카메라", "마이크", "온도 센서"], "answer": 1},
+    {"question": "사람의 시범 동작을 보고 따라 배우는 로봇 학습 방법은?", "choices": ["강화학습", "모방학습", "비지도학습"], "answer": 2},
+    {"question": "주사위의 마주 보는 두 면의 눈을 더하면 항상 몇일까요?", "choices": ["6", "7", "8"], "answer": 2},
+    {"question": "사진 속 물체가 어디에 있는지 찾아내는 AI 작업은?", "choices": ["객체 탐지", "음성 인식", "번역"], "answer": 1},
+    {"question": "LLM은 무엇의 줄임말일까요?", "choices": ["Large Language Model", "Low Level Machine", "Long Learning Memory"], "answer": 1},
+    {"question": "이 게임의 로봇 팔 SO-101의 관절(모터)은 몇 개일까요?", "choices": ["4개", "6개", "8개"], "answer": 2},
+    {"question": "학습한 AI 모델을 인텔 CPU에서 빠르게 실행하도록 돕는 도구는?", "choices": ["OpenVINO", "Photoshop", "Excel"], "answer": 1},
+    {"question": "로봇이 사람 없이 스스로 판단해 움직이는 것을 무엇이라 할까요?", "choices": ["자율", "수동", "원격"], "answer": 1},
+    {"question": "AI가 사진을 학습하려면 사진마다 정답을 달아야 해요. 이 작업은?", "choices": ["라벨링", "렌더링", "코딩"], "answer": 1},
+    {"question": "주사위를 한 번 던져 6이 나올 확률은?", "choices": ["1/2", "1/3", "1/6"], "answer": 3},
+    {"question": "인터넷 없이 내 컴퓨터에서 직접 돌리는 AI를 무엇이라 할까요?", "choices": ["로컬 AI", "클라우드 AI", "웹 AI"], "answer": 1},
+    {"question": "로봇 팔 끝에서 물건을 잡는 부분을 무엇이라 할까요?", "choices": ["그리퍼", "프로펠러", "바퀴"], "answer": 1}
+  ]
+}

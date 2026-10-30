@@ -5,7 +5,7 @@
 ```
 main        시연 가능한 상태만. 직접 push 금지, PR로만 병합
 develop     통합 브랜치. 각자 작업을 여기로 PR
-feature/*   기능 개발      예) feature/KAN-15-vision-read-dice
+feature/*   기능 개발      예) feature/KAN-15-vision-read-yut
 fix/*       버그 수정      예) fix/KAN-40-robot-grip-miss
 docs/*      문서           예) docs/rules-v1
 ```
@@ -17,11 +17,11 @@ docs/*      문서           예) docs/rules-v1
 ```bash
 git switch develop
 git pull
-git switch -c feature/KAN-15-vision-read-dice
+git switch -c feature/KAN-15-vision-read-yut
 # 작업 후
 git add .
-git commit -m "feat(vision): KAN-15 주사위 다수결 인식 추가"
-git push -u origin feature/KAN-15-vision-read-dice
+git commit -m "feat(vision): KAN-15 윷 앞뒤 다수결 인식 추가"
+git push -u origin feature/KAN-15-vision-read-yut
 # GitHub에서 develop 대상으로 PR 생성
 ```
 
@@ -51,7 +51,7 @@ git push -u origin feature/KAN-15-vision-read-dice
 | `src/game`, `src/common`, `config/rules.json` | 김동현 (C1) |
 | `src/vision`, `config/slots.json` | 정성욱 (B) |
 | `src/robot`, `config/poses.json` | 신이서 (A) |
-| `src/llm`, `src/db` | 김관영 (C2) |
+| `src/llm`, `src/db`, `config/quiz.json`, `docs/rules.md` | 김관영 (C2) |
 | `src/ui` | 김민범 (D) |
 
 - 남의 폴더를 고칠 때는 PR에 담당자를 리뷰어로 지정합니다.

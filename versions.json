@@ -13,6 +13,11 @@
     "cuda": "12.8"
   },
   "lerobot": {"version": "0.6.1", "_comment": "requirements-robot.txt와 같게"},
+  "ffmpeg": {
+    "winget_id": "BtbN.FFmpeg.GPL.Shared.7.1",
+    "version": "7.1",
+    "_comment": "torchcodec(LeRobot 영상 읽기)이 FFmpeg DLL을 씀. shared 빌드여야 하고 torchcodec 0.11은 FFmpeg 4~8만 지원 (winget 기본 Gyan.FFmpeg 9.x는 안 됨)"
+  },
   "opencv_gui": "opencv-python==4.13.0.92",
   "lock_files": {
     "common": "requirements.lock",

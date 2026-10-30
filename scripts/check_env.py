@@ -127,6 +127,20 @@ def check_gpu() -> None:
         pass
 
 
+def check_ffmpeg() -> None:
+    """torchcodec(LeRobot 영상 읽기)은 FFmpeg shared 4~8이 PATH에 있어야 함."""
+    first = [line.replace("ffmpeg version ", "").split(" Copyright")[0]
+             for line in run(["ffmpeg", "-hide_banner", "-version"]).splitlines()[:1]]
+    add("FFmpeg", first[0] + f" (기준 {V['ffmpeg']['version']} shared)" if first
+        else f"없음 → winget install --id {V['ffmpeg']['winget_id']}", bool(first) or None, required=False)
+    try:
+        import torchcodec
+        add("torchcodec (LeRobot 영상)", torchcodec.__version__)
+    except Exception as e:  # noqa: BLE001 - DLL을 못 찾으면 OSError·RuntimeError 등
+        add("torchcodec (LeRobot 영상)", f"불러오기 실패 ({type(e).__name__}) → FFmpeg shared 4~8 설치 후 새 터미널: "
+            f"winget install --id {V['ffmpeg']['winget_id']}", False)
+
+
 def check_ollama() -> None:
     exe = shutil.which("ollama")
     version = run(["ollama", "--version"]).split()[-1:] or [""]
@@ -197,6 +211,8 @@ def main() -> None:
     check_lock(a.robot)
     check_packages(a.robot)
     check_gpu()
+    if a.robot:
+        check_ffmpeg()
     check_ollama()
     check_ports()
     if a.cameras:

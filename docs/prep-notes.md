@@ -89,6 +89,7 @@ lerobot-teleoperate --robot.type=so101_follower --robot.port=COM3 --robot.id=fol
     --teleop.type=so101_leader --teleop.port=COM4 --teleop.id=leader
 ```
 
+- 위 conda 명령은 공식 문서 방식입니다. 우리 저장소는 `scripts\setup_env.ps1 -Robot`(uv)으로 LeRobot·CUDA torch·FFmpeg 7.1을 한 번에 설치합니다. FFmpeg가 없으면 torchcodec(녹화 영상 읽기)이 안 되니, `check_env.py --robot`에서 torchcodec ✅를 확인합니다.
 - 조립 완료품이면 `lerobot-setup-motors`(모터 ID 설정)는 보통 필요 없습니다. 모터를 바꿨을 때만 씁니다.
 - 캘리브레이션 `id`는 이후 모든 명령에서 똑같이 써야 합니다. 이름이 바뀌면 다른 캘리브레이션 파일을 읽습니다. 정한 이름을 README에 적어 둡니다 (A 불참 대비).
 - `config/poses.json`은 아직 주사위 게임 키(`tray`, `drop`)만 있습니다. 윷놀이 슬롯 이름으로 등록해야 합니다: `home`, `cell_0`~`cell_19`, `diag_*`, `center`, `wait_*`, `goal_*`, `yut_cup`, `yut_tray`.

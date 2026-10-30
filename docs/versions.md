@@ -26,6 +26,7 @@
 | torch / torchvision | 2.11.0+cu128 / 0.26.0+cu128 | PyPI의 Windows torch는 CPU 전용 → PyTorch 저장소의 CUDA 12.8 빌드 |
 | NVIDIA 드라이버 | 570 이상 | CUDA 12.8 빌드 조건 |
 | LeRobot | 0.6.1 | |
+| FFmpeg | 7.1 shared (`BtbN.FFmpeg.GPL.Shared.7.1`, winget) | torchcodec(LeRobot 영상 읽기)이 FFmpeg DLL을 씀. torchcodec 0.11은 4~8만 지원해서 winget 기본(Gyan.FFmpeg 9.x)은 안 됨. conda를 안 쓰므로 따로 설치 |
 | OpenVINO | 2026.4.1 | |
 | Ollama 앱 | 0.40.13 | |
 | 중계 모델 | gemma4:e2b (대안 qwen2.5:3b) | 3050 6GB 기준 (docs/prep-notes.md 2절) |
@@ -61,6 +62,7 @@ python scripts\check_env.py --demo --robot  # 시연 PC (GPU·Ollama·모델·�
 - numpy·opencv는 LeRobot 조건(`numpy<2.3`, `opencv<4.14`) 안에서만 올립니다. 벗어나면 lock 단계에서 실패합니다.
 - 공통 lock은 로봇 lock을 제약으로 걸어서 만듭니다. 그래서 개발 PC와 시연 PC에서 겹치는 패키지 버전이 같습니다.
 - `opencv-python`과 `opencv-python-headless`는 같은 버전이어야 합니다. 로봇 환경에서는 설치 후 GUI 빌드를 다시 깔아 `imshow`를 살립니다(`setup_env.ps1`이 처리).
+- torchcodec을 올리면 지원하는 FFmpeg 버전도 바뀔 수 있습니다. `.venv\Lib\site-packages\torchcodec\libtorchcodec_core<N>.dll`의 N이 지원하는 FFmpeg 주 버전입니다.
 
 ## LLM 모델 버전
 

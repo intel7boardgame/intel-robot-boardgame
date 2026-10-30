@@ -1,0 +1,5 @@
+# 로봇(A)·ACT·시연 PC용. 설치는 requirements-robot.lock으로 합니다 (scripts/setup_env.ps1 -Robot).
+# CUDA torch 버전은 versions.json의 torch에 있고, lock_deps.ps1이 이 파일과 합쳐 lock을 만듭니다.
+# (Windows에서 PyPI torch는 CPU 전용이라 PyTorch 저장소의 cu128 빌드를 씁니다)
+# lerobot은 opencv-python-headless를 함께 깔아 화면 출력(imshow)을 덮어쓰므로, 설치 후 opencv-python을 다시 깝니다.
+lerobot[core_scripts,feetech]==0.6.1

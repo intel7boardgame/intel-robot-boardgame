@@ -55,6 +55,11 @@ class GameState:
 | `help` | 사람 도움 요청 | `{"message": "윷 인식 실패"}` |
 | `decision` | (확장) 로봇이 말을 고른 이유 | `{"piece": 2, "reason": "capture"}` |
 
+- `move`의 `stacked`는 함께 움직인 말 수입니다 (혼자면 1, 업힌 말이면 2). `to`가 `"goal"`이면 완주입니다.
+- `reason`: `capture` | `stack` | `advance` | `enter` (규칙서 MVP 우선순위 순서)
+- 중계: 이벤트 하나는 `narrate(event)`로 하고, 한 턴 전체를 LLM 한 번으로 중계하려면 `narrate_turn(events)`를 씁니다. 실패하면 가장 중요한 이벤트 하나를 템플릿 문장으로 냅니다.
+- 이 형식으로 만든 가짜 이벤트는 `src/game/yut_reference.py`의 `simulate()`, 윷판 그래프는 `config/yut_board.json`에 있습니다 (C2 작성, Day 1 확정 전 초안).
+
 ## 2. 주사위 게임 인터페이스 (현재 코드, 차선책 전환 시 사용)
 
 | 모듈 | 함수 | 반환 | 담당 |

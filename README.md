@@ -34,16 +34,45 @@ intel-robot-boardgame/
 └── models/            # 학습된 모델·체크포인트 (git 제외)
 ```
 
+## 개발 환경
+
+**Python 3.12로 통일합니다.** LeRobot은 3.12 이상이 필요하고, geti-sdk는 3.13까지만 지원합니다. 모든 버전 기준은 `versions.json`과 잠금 파일(`requirements*.lock`)에 있고, 규칙은 [docs/versions.md](docs/versions.md)에 있습니다.
+
+Windows에서는 설치 스크립트 하나로 끝납니다. uv 설치, `.venv`(3.12) 생성, 패키지 설치, 테스트, 환경 점검까지 합니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\setup_env.ps1          # 공통 (C1·C2·B·D)
+powershell -ExecutionPolicy Bypass -File scripts\setup_env.ps1 -Robot   # + LeRobot·CUDA torch (A, 시연 PC)
+.venv\Scripts\activate
+```
+
+<details>
+<summary>스크립트 없이 직접 설치 (macOS/Linux 포함)</summary>
+
+```bash
+uv venv --python 3.12.14 .venv         # uv가 없으면: python3.12 -m venv .venv
+source .venv/bin/activate              # Windows: .venv\Scripts\activate
+uv pip sync requirements.lock          # 또는 pip install -r requirements.lock
+
+# 로봇(A)·시연 PC만 (Windows): lock에 CUDA torch까지 들어 있음 → opencv 화면 출력 복구
+uv pip sync requirements-robot.lock --extra-index-url https://download.pytorch.org/whl/cu128 --index-strategy unsafe-best-match
+uv pip install --reinstall --no-deps opencv-python==4.13.0.92
+```
+</details>
+
+- 환경 확인: `python scripts/check_env.py` (결과는 `data/env_report_<PC이름>.md`에 저장)
+- **시연 PC 첫 점검**은 [docs/demo-pc-checklist.md](docs/demo-pc-checklist.md)를 따릅니다 (`scripts\demo_pc_check.ps1`).
+- 새 패키지를 넣거나 버전을 올릴 때는 [docs/versions.md](docs/versions.md) "버전 바꾸는 절차"를 따릅니다. 요약하면 `requirements.txt` 수정 → `scripts\lock_deps.ps1` → 테스트 → PR 순서입니다.
+
 ## 실행
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate          # macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-
 python src/main.py --mock       # 비전·로봇 없이 키보드로 한 판 진행 (현재는 주사위 게임)
 python src/main.py              # 실제 카메라·로봇 연결
+python -m pytest tests          # 테스트
 ```
+
+중계 모델은 Ollama `gemma4:e2b`가 기본입니다 (`ollama pull gemma4:e2b`). 바꾸려면 환경 변수 `BOARDGAME_LLM`을 설정합니다.
 
 ## 협업
 

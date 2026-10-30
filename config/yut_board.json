@@ -1,0 +1,41 @@
+{
+  "_comment": "윷판 그래프 (docs/rules.md 기준, 작성: 김관영 C2). 규칙 엔진·화면·ROI·로봇 자세가 같은 칸 이름을 쓰도록 공유합니다. 확정 후 C1이 rules.json과 합칠 수 있습니다",
+  "pieces_per_side": 2,
+  "yut": {
+    "_comment": "평평한 면이 위로 온 윷가락 수 → [이름, 이동 칸 수, 한 번 더]",
+    "0": ["모", 5, true],
+    "1": ["도", 1, false],
+    "2": ["개", 2, false],
+    "3": ["걸", 3, false],
+    "4": ["윷", 4, true]
+  },
+  "again_on_capture": true,
+  "backdo": false,
+  "routes": {
+    "_comment": "말은 지금 칸이 정한 길을 따라갑니다. 마지막 cell_0(참먹이)를 지나면 goal(완주)",
+    "outer": ["wait", "cell_1", "cell_2", "cell_3", "cell_4", "cell_5", "cell_6", "cell_7", "cell_8", "cell_9",
+              "cell_10", "cell_11", "cell_12", "cell_13", "cell_14", "cell_15", "cell_16", "cell_17", "cell_18",
+              "cell_19", "cell_0"],
+    "mo": ["cell_5", "diag_r1", "diag_r2", "center", "diag_r3", "diag_r4", "cell_15", "cell_16", "cell_17",
+           "cell_18", "cell_19", "cell_0"],
+    "back_mo": ["cell_10", "diag_l1", "diag_l2", "center", "diag_l3", "diag_l4", "cell_0"],
+    "room": ["center", "diag_l3", "diag_l4", "cell_0"]
+  },
+  "route_of": {
+    "_comment": "그 칸에 멈춘 말이 다음에 탈 길. 여기에 없는 칸은 outer",
+    "cell_5": "mo", "diag_r1": "mo", "diag_r2": "mo", "diag_r3": "mo", "diag_r4": "mo",
+    "cell_10": "back_mo", "diag_l1": "back_mo", "diag_l2": "back_mo",
+    "center": "room", "diag_l3": "room", "diag_l4": "room"
+  },
+  "layout": {
+    "_comment": "칸 중심의 정규화 좌표 [x, y] (왼쪽 위 0,0 · 오른쪽 아래 1,1). 화면(D)·ROI(B)·자세(A) 초안용, 실제 값은 도안 확정 후 측정",
+    "cell_0": [1.0, 1.0], "cell_1": [1.0, 0.8], "cell_2": [1.0, 0.6], "cell_3": [1.0, 0.4], "cell_4": [1.0, 0.2],
+    "cell_5": [1.0, 0.0], "cell_6": [0.8, 0.0], "cell_7": [0.6, 0.0], "cell_8": [0.4, 0.0], "cell_9": [0.2, 0.0],
+    "cell_10": [0.0, 0.0], "cell_11": [0.0, 0.2], "cell_12": [0.0, 0.4], "cell_13": [0.0, 0.6], "cell_14": [0.0, 0.8],
+    "cell_15": [0.0, 1.0], "cell_16": [0.2, 1.0], "cell_17": [0.4, 1.0], "cell_18": [0.6, 1.0], "cell_19": [0.8, 1.0],
+    "diag_r1": [0.833, 0.167], "diag_r2": [0.667, 0.333], "center": [0.5, 0.5],
+    "diag_r3": [0.333, 0.667], "diag_r4": [0.167, 0.833],
+    "diag_l1": [0.167, 0.167], "diag_l2": [0.333, 0.333],
+    "diag_l3": [0.667, 0.667], "diag_l4": [0.833, 0.833]
+  }
+}
